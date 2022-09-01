@@ -52,7 +52,7 @@ public class JwtAuthCheckFilter {
 
             // renren-fast 自带了 token 认证，所以 Gateway 不需要做登录认证了，跳过 token 验证，转发所有请求。
             boolean flag = true;
-            if(flag) {
+            if (flag) {
                 return chain.filter(exchange);
             }
 
@@ -62,7 +62,7 @@ public class JwtAuthCheckFilter {
             String requestUrl = serverHttpRequest.getURI().getPath();
 
             // 跳过对登录请求的 token 检查。因为登录请求是没有 token 的，是来申请 token 的。
-            if(AUTH_TOKEN_URL.equals(requestUrl)) {
+            if (AUTH_TOKEN_URL.equals(requestUrl)) {
                 return chain.filter(exchange);
             }
 
@@ -74,7 +74,7 @@ public class JwtAuthCheckFilter {
 
             // 对Token解签名，并验证Token是否过期
             boolean isJwtNotValid = jwtTokenUtil.isTokenExpired(token);
-            if(isJwtNotValid){
+            if (isJwtNotValid) {
                 return unauthorizedResponse(exchange, serverHttpResponse, ResponseCodeEnum.TOKEN_INVALID);
             }
             // 验证 token 里面的 userId 是否为空
@@ -108,16 +108,13 @@ public class JwtAuthCheckFilter {
 
     /**
      * 内容编码
-     *
      * @param str 内容
      * @return 编码后的内容
      */
     public static String urlEncode(String str) {
         try {
             return URLEncoder.encode(str, Constants.UTF8);
-        }
-        catch (UnsupportedEncodingException e)
-        {
+        } catch (UnsupportedEncodingException e) {
             return StringUtils.EMPTY;
         }
     }
@@ -128,8 +125,7 @@ public class JwtAuthCheckFilter {
     private String getToken(ServerHttpRequest request) {
         String token = request.getHeaders().getFirst(jwtProperties.getHeader());
         // 如果前端设置了令牌前缀，则裁剪掉前缀
-        if (StringUtils.isNotEmpty(token) && token.startsWith(TokenConstants.PREFIX))
-        {
+        if (org.apache.commons.lang3.StringUtils.isNotEmpty(token) && token.startsWith(TokenConstants.PREFIX)) {
             token = token.replaceFirst(TokenConstants.PREFIX, StringUtils.EMPTY);
         }
         return token;
