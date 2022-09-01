@@ -125,8 +125,6 @@ public class QuestionController {
     @Cacheable(value = "hot", unless = "#result.message.containss('NoCache')")
     public R condition(@PathVariable("id") Long id) {
         QuestionEntity question = IQuestionService.info(id);
-        HashMap<String, Object> map = new HashMap<String, Object>();
-
         return R.ok().put("question", question).put("message", "NoCache");
     }
 }
