@@ -21,8 +21,8 @@ public class PassJavaCorsConfiguration {
         // 允许所有请求方法跨域
         corsConfiguration.addAllowedMethod("*");
         // 允许所有请求来源跨域
-        //corsConfiguration.addAllowedOrigin("*");
-        corsConfiguration.addAllowedOrigin("localhost");
+        corsConfiguration.addAllowedOrigin("*");
+        //corsConfiguration.addAllowedOrigin("localhost");
         //允许携带cookie跨域，否则跨域请求会丢失cookie信息
         corsConfiguration.setAllowCredentials(true);
 

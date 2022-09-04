@@ -45,7 +45,6 @@ public class DynamicDataSourceConfig {
         //默认数据源
         DruidDataSource defaultDataSource = DynamicDataSourceFactory.buildDruidDataSource(dataSourceProperties);
         dynamicDataSource.setDefaultTargetDataSource(defaultDataSource);
-
         return dynamicDataSource;
     }
 

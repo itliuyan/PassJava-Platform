@@ -52,10 +52,7 @@ public class SysLogAspect {
 		Object result = point.proceed();
 		//执行时长(毫秒)
 		long time = System.currentTimeMillis() - beginTime;
-
-		//保存日志
 		saveSysLog(point, time);
-
 		return result;
 	}
 
@@ -65,10 +62,7 @@ public class SysLogAspect {
 
 		SysLogEntity sysLog = new SysLogEntity();
 		SysLog syslog = method.getAnnotation(SysLog.class);
-		if(syslog != null){
-			//注解上的描述
-			sysLog.setOperation(syslog.value());
-		}
+		sysLog.setOperation(syslog.value());
 
 		//请求的方法名
 		String className = joinPoint.getTarget().getClass().getName();

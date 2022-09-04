@@ -49,11 +49,11 @@ public class JwtAuthCheckFilter {
     @Order(-101)
     public GlobalFilter jwtAuthGlobalFilter() {
         return (exchange, chain) -> {
-            //// renren-fast 自带了 token 认证，所以 Gateway 不需要做登录认证了，跳过 token 验证，转发所有请求。
-            //boolean flag = true;
-            //if (flag) {
-            //    return chain.filter(exchange);
-            //}
+            // renren-fast 自带了 token 认证，所以 Gateway 不需要做登录认证了，跳过 token 验证，转发所有请求。
+            boolean flag = true;
+            if (flag) {
+                return chain.filter(exchange);
+            }
 
             ServerHttpRequest serverHttpRequest = exchange.getRequest();
             ServerHttpResponse serverHttpResponse = exchange.getResponse();

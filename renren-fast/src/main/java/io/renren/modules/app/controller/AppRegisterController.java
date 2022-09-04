@@ -1,8 +1,6 @@
 /**
  * Copyright (c) 2016-2019 人人开源 All rights reserved.
- *
  * https://www.renren.io
- *
  * 版权所有，侵权必究！
  */
 
@@ -39,7 +37,7 @@ public class AppRegisterController {
 
     @PostMapping("register")
     @ApiOperation("注册")
-    public R register(@RequestBody RegisterForm form){
+    public R register(@RequestBody RegisterForm form) {
         //表单校验
         ValidatorUtils.validateEntity(form);
 
@@ -49,7 +47,6 @@ public class AppRegisterController {
         user.setPassword(DigestUtils.sha256Hex(form.getPassword()));
         user.setCreateTime(new Date());
         userService.save(user);
-
         return R.ok();
     }
 }
